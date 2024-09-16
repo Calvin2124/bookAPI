@@ -2,9 +2,9 @@
   "name": "cours-back",
   "version": "1.0.0",
   "description": "Dans ce cours, nous allons apprendre a concevoir un back office en utilisant une architecutre API REST avec Node.js, Express, MySQL et Sequelize. Nous allons constuire un mini-projet de gestion de blibliothèque pour illustrer les concepts clés.",
-  "main": "server.cjs",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./src/app.js"
   },
   "keywords": [],
   "author": "",
