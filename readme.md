@@ -18,3 +18,28 @@ npm init -y
 npm i express mysql2 sequelize dotenv
 npm i --save-dev nodemon
 ```
+
+## Structure du projet 
+```
+ BookAPI/
+ |-- src/
+ |   |-- config/
+ |   |   |-- database.js
+ |   |-- models/
+ |   |   |-- index.js
+ |   |   |-- book.js
+ |   |   |-- author.js
+ |   |-- controllers/
+ |   |   |-- bookController.js
+ |   |   |-- authorController.js
+ |   |-- routes/
+ |   |   |-- bookRoutes.js
+ |   |   |-- authorRoutes.js
+ |   |-- middlewares/
+ |   |   |-- errorHandler.js
+ |   |-- app.js
+ |-- .env
+ |-- package.json
+ |-- readme.md
+
+```
