@@ -1,0 +1,14 @@
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+package-lock.json
+
+# Ignore dependency and build directories
+node_modules/
+
+# Ignore environment configuration files
+.env
+
+# Ignore editor configuration files
+.idea/
+.vscode/
