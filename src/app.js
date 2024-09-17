@@ -3,11 +3,13 @@ const bookRoutes = require('./routes/bookRoutes');
 const authorRoutes = require('./routes/authorRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 const sequelize = require('./config/database');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 app.use(express.json());
 
 // Routes 
+app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/authors', authorRoutes);
 
