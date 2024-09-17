@@ -4,6 +4,7 @@ const authorRoutes = require('./routes/authorRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
@@ -12,6 +13,9 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/authors', authorRoutes);
+
+// Cors 
+app.use(cors());
 
 // Error handler
 app.use(errorHandler);
