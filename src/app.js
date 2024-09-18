@@ -9,13 +9,13 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 
+// Cors 
+app.use(cors());
 // Routes 
 app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/authors', authorRoutes);
 
-// Cors 
-app.use(cors());
 
 // Error handler
 app.use(errorHandler);

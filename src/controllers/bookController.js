@@ -3,7 +3,11 @@ const { Book, Author } = require('../models');
 exports.createBook = async (req, res, next) => {
     try {
         // req.body > get the data from the request (from the form on the frontend)
-        const book = await Book.create(req.body);
+        const author = await Author.findByPk(req.body.authorId);
+        if (!author) {
+            return res.status(404).json({ message: 'Author not found' });
+        }
+        const book = await Book.create({ ...req.body, AuthorId: author.id });
         res.status(201).json(book);
     } catch (err){
         next(err);
@@ -13,7 +17,10 @@ exports.createBook = async (req, res, next) => {
 exports.getAllBooks = async (req, res, next) => {
     try {
         // SELECT * FROM books LEFT JOIN authors ON books.authorId = authors.id
-        const books = await Book.findAll({ include: Author });
+        const books = await Book.findAll({
+            include: [{ model: Author, as: 'Author' }]
+        });
+
         res.status(200).json(books);
     } catch (err){
         next(err);
@@ -32,13 +39,36 @@ exports.deleteBook = async (req, res, next) => {
 
 exports.updateBook = async (req, res, next) => {
     try {
-        const book = await Book.findByPk(req.params.id);
-        const updateBook = await Book.update(req.body, { where: { id: book.id } });
-        res.status(200).json(updateBook);
-    }catch (err){
+        const bookId = req.params.id;
+        const { authorId, ...bookData } = req.body;
+        
+        // Vérifiez si le livre existe
+        const book = await Book.findByPk(bookId);
+        if (!book) {
+            return res.status(404).json({ message: "Book not found" });
+        }
+
+        // Vérifiez si l'auteur existe
+        if (authorId) {
+            const author = await Author.findByPk(authorId);
+            if (!author) {
+                return res.status(404).json({ message: "Author not found" });
+            }
+        }
+
+        // Mettez à jour le livre
+        await book.update({ ...bookData, AuthorId: authorId });
+
+        // Récupérez le livre mis à jour avec les informations de l'auteur
+        const updatedBook = await Book.findByPk(bookId, {
+            include: [{ model: Author, as: 'Author' }]
+        });
+
+        res.status(200).json(updatedBook);
+    } catch (err) {
         next(err);
     }
-} 
+}
 
 exports.getBook = async (req, res, next) => {
     try {

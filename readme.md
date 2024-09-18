@@ -96,3 +96,8 @@ const loggerMiddleware = (req, res, next) => {
 }
 app.use(loggerMiddleware);
 ```
+
+
+# Déploiment 
+## Fichier .env.dev
+Dans le fichier .env.dev, vous devez configurer les variables d'environnement pour votre environnement de développement.
